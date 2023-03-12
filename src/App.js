@@ -1,16 +1,15 @@
 import './App.css';
 import Navbar from './Components/Navbar';
 import TextFrom from './Components/TextFrom';
-// import About from './Components/About';
+import About from './Components/About';
 import { useState } from 'react';
 import Alert from './Components/Alert';
-// import{
-//   BrowserRouter as Router,
-//   Switch,
-//   Route,
-//   Routes,
-//   Link
-// } from "react-router-dom"
+import{
+  BrowserRouter as Router,
+  Route,
+  Routes
+  
+} from "react-router-dom"
 
 function App() {
   
@@ -44,26 +43,18 @@ const showAlert = (message, type)=>{
   }
   return (
     <>
-       <Navbar title="Textutils" mode={mode} toggleMode={toggleMode}  />
-       <Alert alert={alert}/>
-       <div className='container my-3'>
-       <TextFrom showAlert={showAlert} heading="Enter the text to analyze Below" mode={mode} />
-       </div>
-       {/* <About/> */}
+      <Router>
+        <Navbar title="TextUtils" mode={mode} toggleMode={toggleMode} aboutText="About" />
+        <Alert alert={alert} />
+        <div className="container my-3">
+          <Routes>
+            <Route exact path="/about" element={<About mode={mode}/>}> </Route>
+            <Route exact path="/" element={<TextFrom showAlert={showAlert} heading="Enter your text to Analyse below" mode={mode} />}></Route>
+          </Routes>
+        </div>
+      </Router>
     </>
-
-    // <>
-    //   <Router>
-    //     <Navbar title="TextUtils" mode={mode} toggleMode={toggleMode} aboutText="About" />
-    //     <Alert alert={alert} />
-    //     <div className="container my-3">
-    //       <Routes>
-    //         <Route exact path="/about" element={<About/>}> </Route>
-    //         <Route exact path="/" element={<TextFrom showAlert={showAlert} heading="Enter your text to Analyse below" mode={mode} />}></Route>
-    //       </Routes>
-    //     </div>
-    //   </Router>
-    // </>
+    
   );
 }
 
